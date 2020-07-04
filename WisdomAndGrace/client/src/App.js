@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import './App.css';
 import { UserProfileProvider } from "./providers/UserProfileProvider";
 import { QuoteProvider } from "./providers/QuoteProvider";
@@ -11,6 +11,10 @@ function App() {
       <UserProfileProvider>
         <QuoteProvider>
           <div className="App">
+            <ul>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="login">Login</Link></li>
+            </ul>
             <ApplicationViews />
           </div>
         </QuoteProvider>

@@ -7,7 +7,7 @@ export default function QuoteList() {
     return (
         <section>
             {quotes.map(q => 
-                <div>{q.text}</div>
+                <div key={q.id}>{q.text}</div>
             )}
         </section>
     );
