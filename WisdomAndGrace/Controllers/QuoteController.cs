@@ -41,7 +41,7 @@ namespace WisdomAndGrace.Controllers
         [HttpPost]
         public IActionResult Post(Quote quote)
         {
-            var currentUserProfile = GetCurrentUserProfile()
+            var currentUserProfile = GetCurrentUserProfile();
             if (currentUserProfile.UserType.Name != "admin")
             {
                 return Unauthorized();
