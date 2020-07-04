@@ -27,7 +27,8 @@ CREATE TABLE [UserProfile] (
   [Email] NVARCHAR(255) NOT NULL,
   [UserTypeId] INTEGER NOT NULL,
 
-  CONSTRAINT FK_UserProfile_UserType FOREIGN KEY (UserTypeId) REFERENCES UserType(Id)
+  CONSTRAINT FK_UserProfile_UserType FOREIGN KEY (UserTypeId) REFERENCES UserType(Id),
+  CONSTRAINT UQ_FirebaseUserId UNIQUE(FirebaseUserId)
 )
 
 CREATE TABLE [Quote] (
@@ -53,8 +54,8 @@ SET IDENTITY_INSERT [UserProfile] ON
 INSERT INTO [UserProfile]
   ([Id], [FirebaseUserId], [Name], [Email], [UserTypeId])
 VALUES
-  (1, 'HGIYeMTYpqfdwXpfSw2AUvxnvsC3', 'Foo Barington', 'foo@bar.com', 1),
-  (2, 'KQ6e9woTo9hsOSFjEr6IWfYDJl73', 'Bar Bazaar', 'bar@baz.com', 2);
+  (1, 'MA9qsgE6vfbp2P1z0kv72bqRql43', 'Foo Barington', 'foo@bar.com', 1),
+  (2, 'vP3tkzRXWmRzwSLGwNTBS5fJs2N2', 'Bar Bazaar', 'bar@baz.com', 2);
 SET IDENTITY_INSERT [UserProfile] OFF
 
 
