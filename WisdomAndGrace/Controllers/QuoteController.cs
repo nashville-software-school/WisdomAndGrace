@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WisdomAndGrace.Data;
 using WisdomAndGrace.Models;
 using WisdomAndGrace.Repositories;
 
 namespace WisdomAndGrace.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class QuoteController : ControllerBase
