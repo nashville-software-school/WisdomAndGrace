@@ -1,20 +1,21 @@
 import React from 'react';
+import { BrowserRouter as Router } from "react-router-dom";
 import './App.css';
 import { UserProfileProvider } from "./providers/UserProfileProvider";
 import { QuoteProvider } from "./providers/QuoteProvider";
-import Login from "./components/Login";
-import QuoteList from "./components/QuoteList";
+import ApplicationViews from "./components/ApplicationViews";
 
 function App() {
   return (
-    <UserProfileProvider>
-      <QuoteProvider>
-        <div className="App">
-          <Login />
-          <QuoteList />
-        </div>
-      </QuoteProvider>
-    </UserProfileProvider>
+    <Router>
+      <UserProfileProvider>
+        <QuoteProvider>
+          <div className="App">
+            <ApplicationViews />
+          </div>
+        </QuoteProvider>
+      </UserProfileProvider>
+    </Router>
   );
 }
 

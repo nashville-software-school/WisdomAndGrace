@@ -1,10 +1,12 @@
 import React, { useState, createContext } from "react";
+import { userHistory, useHistory } from "react-router-dom";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 
 export const UserProfileContext = createContext();
 
 export function UserProfileProvider(props) {
+    const history = useHistory();
     const userProfile = sessionStorage.getItem("userProfile");
     const [isLoggedIn, setIsLoggedIn] = useState(userProfile != null)
 
@@ -18,6 +20,7 @@ export function UserProfileProvider(props) {
         sessionStorage.setItem("userProfile", JSON.stringify(profile));
 
         setIsLoggedIn(true);
+        history.push("/");
     };
 
     const getUserProfile = (firebaseUserId) => {
