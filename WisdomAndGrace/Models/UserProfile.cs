@@ -19,7 +19,7 @@ namespace WisdomAndGrace.Models
         public string Email { get; set; }
 
         [Required]
-        public int UserProfileId { get; set; }
+        public int UserTypeId { get; set; }
 
         public UserType UserType { get; set; }
 
