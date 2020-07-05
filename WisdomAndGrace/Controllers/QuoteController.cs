@@ -46,7 +46,7 @@ namespace WisdomAndGrace.Controllers
             {
                 return Unauthorized();
             }
-
+            quote.UserProfileId = currentUserProfile.Id;
             _quoteRepository.Add(quote);
             return CreatedAtAction(nameof(Get), new { id = quote.Id }, quote);
         }
