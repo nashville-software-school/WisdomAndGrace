@@ -23,9 +23,10 @@ export function UserProfileProvider(props) {
   };
 
   const logout = () => {
-    firebase.auth().signOut();
-    sessionStorage.clear();
-    setIsLoggedIn(false);
+    return firebase.auth().signOut().then(() => {
+      sessionStorage.clear();
+      setIsLoggedIn(false);
+    });
   };
 
   const register = async (userProfile, password) => {
