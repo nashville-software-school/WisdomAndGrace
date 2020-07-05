@@ -29,8 +29,8 @@ export default function Header() {
                   <NavLink tag={RRNavLink} to="/add">Add Quote</NavLink>
                 </NavItem>
                 <NavItem>
-                  <a aria-current="page" className="nav-link" 
-                     style={{cursor: "pointer"}} onClick={logout}>Logout</a>
+                  <a aria-current="page" className="nav-link"
+                    style={{ cursor: "pointer" }} onClick={logout}>Logout</a>
                 </NavItem>
               </>
             }
@@ -44,6 +44,13 @@ export default function Header() {
                 </NavItem>
               </>
             }
+          </Nav>
+          <Nav navbar>
+            <NavItem>
+              <a aria-current="page" className="nav-link"
+                href="https://www.youtube.com/watch?v=3N_ywhx6_K0"
+                target="_new">Grace Hopper on Letterman</a>
+            </NavItem>
           </Nav>
         </Collapse>
       </Navbar>
