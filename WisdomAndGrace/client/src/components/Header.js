@@ -12,7 +12,7 @@ import {
 import { UserProfileContext } from "../providers/UserProfileProvider";
 
 export default function Header() {
-  const { isLoggedIn } = useContext(UserProfileContext);
+  const { isLoggedIn, logout } = useContext(UserProfileContext);
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
@@ -24,9 +24,15 @@ export default function Header() {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             {isLoggedIn &&
-            <NavItem>
-              <NavLink tag={RRNavLink} to="/add">Add Quote</NavLink>
-            </NavItem>
+              <>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="/add">Add Quote</NavLink>
+                </NavItem>
+                <NavItem>
+                  <a aria-current="page" className="nav-link" 
+                     style={{cursor: "pointer"}} onClick={logout}>Logout</a>
+                </NavItem>
+              </>
             }
             {!isLoggedIn &&
               <>

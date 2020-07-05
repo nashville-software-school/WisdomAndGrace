@@ -22,6 +22,12 @@ export function UserProfileProvider(props) {
     setIsLoggedIn(true);
   };
 
+  const logout = () => {
+    firebase.auth().signOut();
+    sessionStorage.clear();
+    setIsLoggedIn(false);
+  };
+
   const register = async (userProfile, password) => {
     const { user } = await firebase.auth().createUserWithEmailAndPassword(userProfile.email, password);
 
@@ -58,7 +64,7 @@ export function UserProfileProvider(props) {
   };
 
   return (
-    <UserProfileContext.Provider value={{ isLoggedIn, login, register }}>
+    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register }}>
       {props.children}
     </UserProfileContext.Provider>
   );
