@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import Login from "./Login";
-import QuoteList from "./QuoteList";
 import { UserProfileContext } from "../providers/UserProfileProvider";
+import Login from "./Login";
+import Register from "./Register";
+import QuoteList from "./QuoteList";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -15,6 +16,10 @@ export default function ApplicationViews() {
 
       <Route path="/login">
         <Login />
+      </Route>
+
+      <Route path="/register">
+        <Register />
       </Route>
     </Switch>
   );

@@ -29,8 +29,10 @@ namespace WisdomAndGrace.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(UserProfile userProfile)
+        public IActionResult Register(UserProfile userProfile)
         {
+            // All newly registered users start out as a "user" user type (i.e. they are not admins)
+            userProfile.UserTypeId = UserType.USER_TYPE_ID;
             _userProfileRepository.Add(userProfile);
             return CreatedAtAction(
                 nameof(GetByFirebaseUserId), new { firebaseUserId = userProfile.FirebaseUserId }, userProfile);

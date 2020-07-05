@@ -1,41 +1,65 @@
 import React, { useState, createContext } from "react";
-import { useHistory } from "react-router-dom";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 
 export const UserProfileContext = createContext();
 
 export function UserProfileProvider(props) {
-    const history = useHistory();
-    const userProfile = sessionStorage.getItem("userProfile");
-    const [isLoggedIn, setIsLoggedIn] = useState(userProfile != null)
+  const apiUrl = "api/userprofile";
 
-    const login = async (email, pw) => {
-        const { user } = await firebase.auth().signInWithEmailAndPassword(email, pw);
+  const userProfile = sessionStorage.getItem("userProfile");
+  const [isLoggedIn, setIsLoggedIn] = useState(userProfile != null)
 
-        const token = await user.getIdToken();
-        sessionStorage.setItem("token", token);
+  const login = async (email, pw) => {
+    const { user } = await firebase.auth().signInWithEmailAndPassword(email, pw);
 
-        const profile = await getUserProfile(user.uid);
-        sessionStorage.setItem("userProfile", JSON.stringify(profile));
+    const token = await user.getIdToken();
+    sessionStorage.setItem("token", token);
 
-        setIsLoggedIn(true);
-        history.push("/");
-    };
+    const profile = await getUserProfile(user.uid);
+    sessionStorage.setItem("userProfile", JSON.stringify(profile));
 
-    const getUserProfile = (firebaseUserId) => {
-        const token = sessionStorage.getItem("token");
-        return fetch(`api/userprofile/${firebaseUserId}`, {
-            method: "GET",
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }).then(resp => resp.json());
-    };
+    setIsLoggedIn(true);
+  };
 
-    return (
-        <UserProfileContext.Provider value={{ isLoggedIn, login }}>
-            {props.children}
-        </UserProfileContext.Provider>
-    );
+  const register = async (userProfile, password) => {
+    const { user } = await firebase.auth().createUserWithEmailAndPassword(userProfile.email, password);
+
+    const token = await user.getIdToken();
+    sessionStorage.setItem("token", token);
+
+    userProfile.firebaseUserId = user.uid;
+    const savedUserProfile = await saveUser(userProfile);
+    sessionStorage.setItem("userProfile", JSON.stringify(savedUserProfile));
+
+    setIsLoggedIn(true);
+  };
+
+  const getUserProfile = (firebaseUserId) => {
+    const token = sessionStorage.getItem("token");
+    return fetch(`${apiUrl}/${firebaseUserId}`, {
+      method: "GET",
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    }).then(resp => resp.json());
+  };
+
+  const saveUser = (userProfile) => {
+    const token = sessionStorage.getItem("token");
+    return fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(userProfile)
+    }).then(resp => resp.json());
+  };
+
+  return (
+    <UserProfileContext.Provider value={{ isLoggedIn, login, register }}>
+      {props.children}
+    </UserProfileContext.Provider>
+  );
 }

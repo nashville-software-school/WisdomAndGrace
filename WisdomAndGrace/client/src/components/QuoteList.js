@@ -1,14 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { QuoteContext } from "../providers/QuoteProvider";
 
 export default function QuoteList() {
-    const { quotes } = useContext(QuoteContext);
+  const { quotes, refreshQuotes } = useContext(QuoteContext);
 
-    return (
-        <section>
-            {quotes.map(q => 
-                <div key={q.id}>{q.text}</div>
-            )}
-        </section>
-    );
+  useEffect(() => {
+    refreshQuotes();
+  }, []);
+
+  return (
+    <section>
+      {quotes.map(q =>
+        <div key={q.id}>{q.text}</div>
+      )}
+    </section>
+  );
 }
