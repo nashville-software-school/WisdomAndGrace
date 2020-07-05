@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { QuoteContext } from "../providers/QuoteProvider";
 
 export default function QuoteAddForm() {
@@ -11,7 +11,8 @@ export default function QuoteAddForm() {
   const submitForm = (e) => {
     e.preventDefault();
     addQuote({ text: quoteText })
-      .then(() => history.push("/"));
+      .then(() => history.push("/"))
+      .catch((err) => alert(`An error ocurred: ${err.message}`));
   };
 
   return (

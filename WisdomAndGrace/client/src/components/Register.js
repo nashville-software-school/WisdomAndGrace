@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useHistory } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
 
@@ -14,7 +14,7 @@ export default function Register() {
 
   const registerClick = (e) => {
     e.preventDefault();
-    if (password && password != confirmPassword) {
+    if (password && password !== confirmPassword) {
       alert("Passwords don't match. Do better.");
     } else {
       const userProfile = { name, email };

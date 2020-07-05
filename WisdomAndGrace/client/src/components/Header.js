@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { NavLink as RRNavLink, useParams } from "react-router-dom";
+import { NavLink as RRNavLink } from "react-router-dom";
 import {
   Collapse,
   Navbar,
