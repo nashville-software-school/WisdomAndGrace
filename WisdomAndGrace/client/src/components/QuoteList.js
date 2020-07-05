@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import Quote from "./Quote";
 import { QuoteContext } from "../providers/QuoteProvider";
 
 export default function QuoteList() {
@@ -11,7 +12,7 @@ export default function QuoteList() {
   return (
     <section>
       {quotes.map(q =>
-        <div key={q.id}>{q.text}</div>
+        <Quote key={q.id} quote={q}/>
       )}
     </section>
   );

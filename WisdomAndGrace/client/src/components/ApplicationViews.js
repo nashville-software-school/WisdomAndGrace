@@ -9,18 +9,20 @@ export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
 
   return (
-    <Switch>
-      <Route path="/" exact>
-        {isLoggedIn ? <QuoteList /> : <Redirect to="/login" />}
-      </Route>
+    <main>
+      <Switch>
+        <Route path="/" exact>
+          {isLoggedIn ? <QuoteList /> : <Redirect to="/login" />}
+        </Route>
 
-      <Route path="/login">
-        <Login />
-      </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
 
-      <Route path="/register">
-        <Register />
-      </Route>
-    </Switch>
+        <Route path="/register">
+          <Register />
+        </Route>
+      </Switch>
+    </main>
   );
 };
