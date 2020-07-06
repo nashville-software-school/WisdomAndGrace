@@ -1,72 +1,68 @@
-import React, { useState, createContext } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 
 export const UserProfileContext = createContext();
 
 export function UserProfileProvider(props) {
-  const apiUrl = "api/userprofile";
+  const apiUrl = "/api/userprofile";
 
   const userProfile = sessionStorage.getItem("userProfile");
-  const [isLoggedIn, setIsLoggedIn] = useState(userProfile != null)
+  const [isLoggedIn, setIsLoggedIn] = useState(userProfile != null);
 
-  const login = async (email, pw) => {
-    const { user } = await firebase.auth().signInWithEmailAndPassword(email, pw);
+  const [isFirebaseReady, setIsFirebaseReady] = useState(false);
 
-    const token = await user.getIdToken();
-    sessionStorage.setItem("token", token);
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((u) => {
+      setIsLoggedIn(!!u);
+      setIsFirebaseReady(true);
+    });
+  }, []);
 
-    const profile = await getUserProfile(user.uid);
-    sessionStorage.setItem("userProfile", JSON.stringify(profile));
-
-    setIsLoggedIn(true);
+  const login = (email, pw) => {
+    return firebase.auth().signInWithEmailAndPassword(email, pw)
+      .then((signInResponse) => getUserProfile(signInResponse.user.uid))
+      .then((userProfile) => sessionStorage.setItem("userProfile", JSON.stringify(userProfile)));
   };
 
   const logout = () => {
-    return firebase.auth().signOut().then(() => {
-      sessionStorage.clear();
-      setIsLoggedIn(false);
-    });
+    return firebase.auth().signOut()
+      .then(() => sessionStorage.clear());
   };
 
-  const register = async (userProfile, password) => {
-    const { user } = await firebase.auth().createUserWithEmailAndPassword(userProfile.email, password);
-
-    const token = await user.getIdToken();
-    sessionStorage.setItem("token", token);
-
-    userProfile.firebaseUserId = user.uid;
-    const savedUserProfile = await saveUser(userProfile);
-    sessionStorage.setItem("userProfile", JSON.stringify(savedUserProfile));
-
-    setIsLoggedIn(true);
+  const register = (userProfile, password) => {
+    return firebase.auth().createUserWithEmailAndPassword(userProfile.email, password)
+      .then((createResponse) => saveUser({ ...userProfile, firebaseUserId: createResponse.user.uid }))
+      .then((savedUserProfile) => sessionStorage.setItem("userProfile", JSON.stringify(savedUserProfile)));
   };
+
+  const getToken = () => firebase.auth().currentUser.getIdToken();
 
   const getUserProfile = (firebaseUserId) => {
-    const token = sessionStorage.getItem("token");
-    return fetch(`${apiUrl}/${firebaseUserId}`, {
-      method: "GET",
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    }).then(resp => resp.json());
+    return getToken().then((token) =>
+      fetch(`${apiUrl}/${firebaseUserId}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(resp => resp.json()));
   };
 
   const saveUser = (userProfile) => {
-    const token = sessionStorage.getItem("token");
-    return fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(userProfile)
-    }).then(resp => resp.json());
+    return getToken().then((token) =>
+      fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userProfile)
+      }).then(resp => resp.json()));
   };
 
   return (
-    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register }}>
-      {props.children}
+    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getToken }}>
+      {isFirebaseReady && props.children}
     </UserProfileContext.Provider>
   );
 }
