@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { Spinner } from "reactstrap";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
 import Login from "./Login";
