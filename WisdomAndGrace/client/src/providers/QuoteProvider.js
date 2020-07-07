@@ -4,7 +4,7 @@ import { UserProfileContext } from "./UserProfileProvider";
 export const QuoteContext = createContext();
 
 export function QuoteProvider(props) {
-  const apiUrl = "api/quote";
+  const apiUrl = "/api/quote";
   const { getToken } = useContext(UserProfileContext);
 
   const [quotes, setQuotes] = useState([]);
