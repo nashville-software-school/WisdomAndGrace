@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using WisdomAndGrace.Data;
 using WisdomAndGrace.Models;
 using WisdomAndGrace.Repositories;
 
@@ -12,13 +11,15 @@ namespace WisdomAndGrace.Controllers
     [ApiController]
     public class QuoteController : ControllerBase
     {
-        private readonly QuoteRepository _quoteRepository;
-        private readonly UserProfileRepository _userProfileRepository;
+        private readonly IQuoteRepository _quoteRepository;
+        private readonly IUserProfileRepository _userProfileRepository;
 
-        public QuoteController(ApplicationDbContext context)
+        public QuoteController(
+            IQuoteRepository quoteRepository, 
+            IUserProfileRepository userProfileRepository)
         {
-            _quoteRepository = new QuoteRepository(context);
-            _userProfileRepository = new UserProfileRepository(context);
+            _quoteRepository = quoteRepository;
+            _userProfileRepository = userProfileRepository;
         }
 
         [HttpGet]

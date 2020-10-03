@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WisdomAndGrace.Data;
 using WisdomAndGrace.Models;
 using WisdomAndGrace.Repositories;
 
@@ -11,10 +10,10 @@ namespace WisdomAndGrace.Controllers
     [ApiController]
     public class UserProfileController : ControllerBase
     {
-        private readonly UserProfileRepository _userProfileRepository;
-        public UserProfileController(ApplicationDbContext context)
+        private readonly IUserProfileRepository _userProfileRepository;
+        public UserProfileController(IUserProfileRepository userProfileRepository)
         {
-            _userProfileRepository = new UserProfileRepository(context); 
+            _userProfileRepository = userProfileRepository;
         }
 
         [HttpGet("{firebaseUserId}")]
