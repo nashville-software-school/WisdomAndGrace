@@ -1,5 +1,4 @@
 import React, { useState, useEffect, createContext } from "react";
-import { Spinner } from "reactstrap";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 
@@ -10,13 +9,6 @@ export function UserProfileProvider(props) {
 
   const userProfile = sessionStorage.getItem("userProfile");
   const [isLoggedIn, setIsLoggedIn] = useState(userProfile != null);
-
-  const [isFirebaseReady, setIsFirebaseReady] = useState(false);
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged((u) => {
-      setIsFirebaseReady(true);
-    });
-  }, []);
 
   const login = (email, pw) => {
     return firebase.auth().signInWithEmailAndPassword(email, pw)
@@ -70,9 +62,7 @@ export function UserProfileProvider(props) {
 
   return (
     <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getToken }}>
-      {isFirebaseReady
-        ? props.children
-        : <Spinner className="app-spinner dark"/>}
+        {props.children}
     </UserProfileContext.Provider>
   );
 }
