@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
 import './App.css';
-import { QuoteProvider } from "./providers/QuoteProvider";
 import { Spinner } from "reactstrap";
 import Header from "./components/Header";
 import ApplicationViews from "./components/ApplicationViews";
@@ -23,10 +22,8 @@ function App() {
 
   return (
     <Router>
-      <QuoteProvider>
         <Header isLoggedIn={isLoggedIn} />
         <ApplicationViews isLoggedIn={isLoggedIn} />
-      </QuoteProvider>
     </Router>
   );
 }
