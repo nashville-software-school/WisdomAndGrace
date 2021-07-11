@@ -1,12 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Quote from "./Quote";
-import { QuoteContext } from "../providers/QuoteProvider";
+import { getAllQuotes } from "../modules/quoteManager";
 
 export default function QuoteList() {
-  const { quotes, refreshQuotes } = useContext(QuoteContext);
+  const [ quotes, setQuotes ] = useState([]);
 
   useEffect(() => {
-    refreshQuotes();
+    getAllQuotes().then(setQuotes);
   }, []);
 
   return (

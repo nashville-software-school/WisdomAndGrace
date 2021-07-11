@@ -1,11 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { QuoteContext } from "../providers/QuoteProvider";
+import { addQuote } from "../modules/quoteManager";
 
 export default function QuoteAddForm() {
   const history = useHistory();
-  const { addQuote } = useContext(QuoteContext);
   const [quoteText, setQuoteText] = useState();
 
   const submitForm = (e) => {
