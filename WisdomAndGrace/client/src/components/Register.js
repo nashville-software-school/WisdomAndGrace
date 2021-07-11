@@ -27,7 +27,7 @@ export default function Register() {
       <fieldset>
         <FormGroup>
           <Label htmlFor="name">Name</Label>
-          <Input id="name" type="text" onChange={e => setName(e.target.value)} />
+          <Input id="name" type="text" autoFocus onChange={e => setName(e.target.value)} />
         </FormGroup>
         <FormGroup>
           <Label for="email">Email</Label>
