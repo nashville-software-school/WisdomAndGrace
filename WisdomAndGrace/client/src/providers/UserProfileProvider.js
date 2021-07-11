@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext } from "react";
 import { Spinner } from "reactstrap";
-import * as firebase from "firebase/app";
+import firebase from "firebase/app";
 import "firebase/auth";
 
 export const UserProfileContext = createContext();

@@ -22,7 +22,7 @@ export default function Login() {
       <fieldset>
         <FormGroup>
           <Label for="email">Email</Label>
-          <Input id="email" type="text" onChange={e => setEmail(e.target.value)} />
+          <Input id="email" type="text" autoFocus onChange={e => setEmail(e.target.value)} />
         </FormGroup>
         <FormGroup>
           <Label for="password">Password</Label>
