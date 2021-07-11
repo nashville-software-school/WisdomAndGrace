@@ -9,9 +9,11 @@ import {
   NavItem,
   NavLink
 } from 'reactstrap';
-import { logout } from "../modules/authManager";
+import { useAuth } from "../modules/authManager";
 
-export default function Header({ isLoggedIn }) {
+export default function Header() {
+  const { isLoggedIn, logout } = useAuth();
+
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 

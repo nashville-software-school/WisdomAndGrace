@@ -6,10 +6,9 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import firebase from "firebase/app";
 
-const firebaseConfig = {
+firebase.initializeApp({
   apiKey: process.env.REACT_APP_API_KEY,
-};
-firebase.initializeApp(firebaseConfig);
+});
 
 ReactDOM.render(
   <React.StrictMode>

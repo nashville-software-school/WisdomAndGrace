@@ -4,8 +4,12 @@ import Login from "./Login";
 import Register from "./Register";
 import QuoteList from "./QuoteList";
 import QuoteAddForm from "./QuoteAddForm";
+import { useAuth } from "../modules/authManager";
 
-export default function ApplicationViews({ isLoggedIn }) {
+export default function ApplicationViews() {
+
+  const { isLoggedIn } = useAuth();
+
   return (
     <main>
       <Switch>

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useHistory } from "react-router-dom";
-import { register } from "../modules/authManager";
+import { useAuth } from "../modules/authManager";
 
 export default function Register() {
+  const { register } = useAuth();
   const history = useHistory();
 
   const [name, setName] = useState();

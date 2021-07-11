@@ -4,16 +4,14 @@ import './App.css';
 import { Spinner } from "reactstrap";
 import Header from "./components/Header";
 import ApplicationViews from "./components/ApplicationViews";
-import { onLoginStatusChange } from "./modules/authManager";
+import { useAuth } from "./modules/authManager";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(null);
 
-  useEffect(() => {
-    onLoginStatusChange(setIsLoggedIn);
-  }, []);
+  const { isLoggedIn } = useAuth();
 
-  // The "isLoggedIn" state variable will be null until //  the app's connection to firebase has been established.
+  // The "isLoggedIn" state variable will be null until 
+  //  the app's connection to firebase has been established.
   //  Then it will be set to true or false by the "onLoginStatusChange" function
   if (isLoggedIn === null) {
     // Until we know whether or not the user is logged in or not, just show a spinner
@@ -22,8 +20,8 @@ function App() {
 
   return (
     <Router>
-        <Header isLoggedIn={isLoggedIn} />
-        <ApplicationViews isLoggedIn={isLoggedIn} />
+        <Header />
+        <ApplicationViews />
     </Router>
   );
 }
