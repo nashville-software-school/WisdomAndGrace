@@ -13,6 +13,19 @@ const _doesUserExist = (firebaseUserId) => {
     }).then(resp => resp.ok));
 };
 
+const _saveUser = (userProfile) => {
+  return getToken().then((token) =>
+    fetch(_apiUrl, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(userProfile)
+    }).then(resp => resp.json()));
+};
+
+
 
 export const getToken = () => firebase.auth().currentUser.getIdToken();
 
@@ -37,6 +50,15 @@ export const login = (email, pw) => {
 
 export const logout = () => {
   firebase.auth().signOut()
+};
+
+
+export const register = (userProfile, password) => {
+  return firebase.auth().createUserWithEmailAndPassword(userProfile.email, password)
+    .then((createResponse) => _saveUser({ 
+      ...userProfile, 
+      firebaseUserId: createResponse.user.uid 
+    }));
 };
 
 

@@ -1,11 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useHistory } from "react-router-dom";
-import { UserProfileContext } from "../providers/UserProfileProvider";
+import { register } from "../modules/authManager";
 
 export default function Register() {
   const history = useHistory();
-  const { register } = useContext(UserProfileContext);
 
   const [name, setName] = useState();
   const [email, setEmail] = useState();
