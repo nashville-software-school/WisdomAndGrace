@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { NavLink as RRNavLink } from "react-router-dom";
 import {
   Collapse,
@@ -9,10 +9,9 @@ import {
   NavItem,
   NavLink
 } from 'reactstrap';
-import { UserProfileContext } from "../providers/UserProfileProvider";
+import { logout } from "../modules/authManager";
 
-export default function Header() {
-  const { isLoggedIn, logout } = useContext(UserProfileContext);
+export default function Header({ isLoggedIn }) {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 

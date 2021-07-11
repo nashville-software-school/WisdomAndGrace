@@ -1,11 +1,10 @@
 import React, { useState, createContext, useContext } from "react";
-import { UserProfileContext } from "./UserProfileProvider";
+import { getToken } from "../modules/authManager";
 
 export const QuoteContext = createContext();
 
 export function QuoteProvider(props) {
   const apiUrl = "/api/quote";
-  const { getToken } = useContext(UserProfileContext);
 
   const [quotes, setQuotes] = useState([]);
 

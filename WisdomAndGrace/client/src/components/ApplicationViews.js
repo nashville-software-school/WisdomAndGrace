@@ -6,9 +6,7 @@ import Register from "./Register";
 import QuoteList from "./QuoteList";
 import QuoteAddForm from "./QuoteAddForm";
 
-export default function ApplicationViews() {
-  const { isLoggedIn } = useContext(UserProfileContext);
-
+export default function ApplicationViews({ isLoggedIn }) {
   return (
     <main>
       <Switch>
