@@ -3,8 +3,6 @@ import "firebase/auth";
 
 const _apiUrl = "/api/userprofile";
 
-
-
 const _doesUserExist = (firebaseUserId) => {
   return getToken().then((token) =>
     fetch(`${_apiUrl}/DoesUserExist/${firebaseUserId}`, {
@@ -24,12 +22,18 @@ export const login = (email, pw) => {
     .then((signInResponse) => _doesUserExist(signInResponse.user.uid))
     .then((doesUserExist) => {
       if (!doesUserExist) {
-        console.error("Something's wrong. The user exists in firebase, but not in the application database.")
+
+        // If we couldn't find the user in our app's database, we should logout of firebase
         logout();
+
+        throw new Error("Something's wrong. The user exists in firebase, but not in the application database.");
       }
-      return doesUserExist;
+    }).catch(err => {
+      console.error(err);
+      throw err;
     });
 };
+
 
 export const logout = () => {
   firebase.auth().signOut()

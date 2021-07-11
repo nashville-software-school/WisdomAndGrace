@@ -12,17 +12,8 @@ export default function Login() {
   const loginSubmit = (e) => {
     e.preventDefault();
     login(email, password)
-      .then((wasLoginSuccessful) => {
-        if (wasLoginSuccessful) {
-          history.push("/");
-        } else {
-          alert("Login Failed");
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        alert("Login Failed");
-      });
+      .then(() => history.push("/"))
+      .catch(() => alert("Login Failed"));
   };
 
   return (
