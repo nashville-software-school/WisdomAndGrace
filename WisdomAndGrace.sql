@@ -56,6 +56,8 @@ INSERT INTO [UserProfile]
 VALUES
   (1, '4oULyNuszpUGbNkTqGS0T8Iqs1L2', 'Foo Barington', 'foo@bar.com', 1),
   (2, 'vP3tkzRXWmRzwSLGwNTBS5fJs2N2', 'Bar Bazaar', 'bar@baz.com', 2);
+  (3, '7WdrcZLTlrdlb4ZOBKoMJPwkwHJ2', 'Ally Autocrat', 'a@a.com', 1);
+  (4, 'IkRfo5z1u0T2WGuoge8MquXhU7Y2', 'Bobby Bernstein', 'b@b.com', 2);
 SET IDENTITY_INSERT [UserProfile] OFF
 
 
