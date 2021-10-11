@@ -56,6 +56,8 @@ INSERT INTO [UserProfile]
 VALUES
   (1, '4oULyNuszpUGbNkTqGS0T8Iqs1L2', 'Foo Barington', 'foo@bar.com', 1),
   (2, 'vP3tkzRXWmRzwSLGwNTBS5fJs2N2', 'Bar Bazaar', 'bar@baz.com', 2);
+  (3, 'sJvkYRMSrdQBLQEGK7hxpYKg8MP2', 'King Friday', 'king@goobly.com', 1),
+  (4, 'K5ZIMcKshqNbdPaW9LNOzKZZUll2', 'Queen Sara', 'queen@goobly.com', 2);
 SET IDENTITY_INSERT [UserProfile] OFF
 
 
