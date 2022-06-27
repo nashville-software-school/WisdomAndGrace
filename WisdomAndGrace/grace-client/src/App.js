@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router } from "react-router-dom";
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./App.css";
 import { Spinner } from "reactstrap";
 import Header from "./components/Header";
 import ApplicationViews from "./components/ApplicationViews";
+import { BrowserRouter } from "react-router-dom";
 import { onLoginStatusChange } from "./modules/authManager";
 
 function App() {
@@ -17,14 +17,16 @@ function App() {
   //  Then it will be set to true or false by the "onLoginStatusChange" function
   if (isLoggedIn === null) {
     // Until we know whether or not the user is logged in or not, just show a spinner
-    return <Spinner className="app-spinner dark"/>;
+    return <Spinner className="app-spinner dark" />;
   }
 
   return (
-    <Router>
+    <div className="App">
+      <BrowserRouter>
         <Header isLoggedIn={isLoggedIn} />
         <ApplicationViews isLoggedIn={isLoggedIn} />
-    </Router>
+      </BrowserRouter>
+    </div>
   );
 }
 

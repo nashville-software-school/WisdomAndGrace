@@ -3,7 +3,7 @@ import Quote from "./Quote";
 import { getAllQuotes } from "../modules/quoteManager";
 
 export default function QuoteList() {
-  const [ quotes, setQuotes ] = useState([]);
+  const [quotes, setQuotes] = useState([]);
 
   useEffect(() => {
     getAllQuotes().then(setQuotes);
@@ -11,9 +11,9 @@ export default function QuoteList() {
 
   return (
     <section>
-      {quotes.map(q =>
-        <Quote key={q.id} quote={q}/>
-      )}
+      {quotes.map((q) => (
+        <Quote key={q.id} quote={q} />
+      ))}
     </section>
   );
 }
