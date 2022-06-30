@@ -5,7 +5,7 @@ export default function Quote({ quote }) {
   return (
     <Card className="m-4">
       <CardBody>
-          <strong>{quote.text}</strong>
+        <strong>{quote.text}</strong>
       </CardBody>
     </Card>
   );

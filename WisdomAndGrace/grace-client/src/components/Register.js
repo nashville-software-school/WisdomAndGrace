@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { useHistory } from "react-router-dom";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { useNavigate } from "react-router-dom";
 import { register } from "../modules/authManager";
 
 export default function Register() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [name, setName] = useState();
   const [email, setEmail] = useState();
@@ -17,8 +17,7 @@ export default function Register() {
       alert("Passwords don't match. Do better.");
     } else {
       const userProfile = { name, email };
-      register(userProfile, password)
-        .then(() => history.push("/"));
+      register(userProfile, password).then(() => navigate("/"));
     }
   };
 
@@ -27,19 +26,36 @@ export default function Register() {
       <fieldset>
         <FormGroup>
           <Label htmlFor="name">Name</Label>
-          <Input id="name" type="text" autoFocus onChange={e => setName(e.target.value)} />
+          <Input
+            id="name"
+            type="text"
+            autoFocus
+            onChange={(e) => setName(e.target.value)}
+          />
         </FormGroup>
         <FormGroup>
           <Label for="email">Email</Label>
-          <Input id="email" type="text" onChange={e => setEmail(e.target.value)} />
+          <Input
+            id="email"
+            type="text"
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </FormGroup>
         <FormGroup>
           <Label for="password">Password</Label>
-          <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
+          <Input
+            id="password"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </FormGroup>
         <FormGroup>
           <Label for="confirmPassword">Confirm Password</Label>
-          <Input id="confirmPassword" type="password" onChange={e => setConfirmPassword(e.target.value)} />
+          <Input
+            id="confirmPassword"
+            type="password"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
         </FormGroup>
         <FormGroup>
           <Button>Register</Button>
