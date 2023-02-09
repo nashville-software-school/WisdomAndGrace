@@ -70,6 +70,17 @@ export const register = (userProfile, password) => {
     }).then(() => _onLoginStatusChangedHandler(true)));
 };
 
+export const me = () => {
+  return getToken().then((token) =>
+    fetch(`${_apiUrl}/me`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((resp) => resp.json()),
+  );
+};
+
 
 // This function will be overwritten when the react app calls `onLoginStatusChange`
 let _onLoginStatusChangedHandler = () => {
