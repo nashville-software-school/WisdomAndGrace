@@ -11,7 +11,7 @@ import {
 } from "reactstrap";
 import { logout } from "../modules/authManager";
 
-export default function Header({ isLoggedIn }) {
+export default function Header({ isLoggedIn, userProfile }) {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
@@ -69,6 +69,11 @@ export default function Header({ isLoggedIn }) {
                 Grace Hopper on Letterman
               </a>
             </NavItem>
+            {userProfile && (
+              <NavItem>
+                <NavLink>Welcome, {userProfile.name}!</NavLink>
+              </NavItem>
+            )}
           </Nav>
         </Collapse>
       </Navbar>
